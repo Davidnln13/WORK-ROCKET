@@ -14,9 +14,9 @@ class Game
     this.rocketImg = new Image();
     this.rocketImg.src = "resources/images/spaceship.png";
     this.rocketImg.addEventListener("load", this.loadImage);
-    this.rocketSprite = new Sprite(this.ctx,{width: 286, height: 500, image: this.rocketImg});
+    this.rocketSprite = new Rocket(this.ctx,{width: 100, height: 175, image: this.rocketImg});
   }
-
+  //when the image loads we call update
   loadImage(e)
   {
     gameNamespace.game.update();

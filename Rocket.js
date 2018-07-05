@@ -12,7 +12,7 @@ class Rocket
      this.ctx = context;
      //when the countdown is false were not counting so launch the rocket
      this.countdown = true;
-     this.countdownSeconds = 1;
+     this.countdownSeconds = 5;
      //check if 5 seconds has passed with the difference
      this.startTime = new Date();
      this.currentTime = new Date();
@@ -56,7 +56,7 @@ class Rocket
   }
   render()
   {
-    //clear window redraw image
+      //clear window redraw image
       this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       this.ctx.drawImage(this.image,this.imgX,this.imgY,this.width,this.height);
   }
@@ -67,6 +67,7 @@ class Rocket
 
       if(differenceInSeconds >= (this.secondsPassed + 1))
       {
+        console.log(this.countdownSeconds - this.secondsPassed);
         this.secondsPassed +=1;
         if(differenceInSeconds > this.countdownSeconds)
         {

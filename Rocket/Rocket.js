@@ -35,7 +35,7 @@ class Rocket
     {
       this.moveUp();
     }
-
+    //increase change in velocity over time for better visuals
     if(this.currentVelocityY > 0.15)
     {
       this.changeInVelocity = 0.02;

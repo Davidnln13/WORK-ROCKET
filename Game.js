@@ -15,6 +15,7 @@ class Game
     this.rocketImg.src = "resources/images/spaceship.png";
     this.rocketImg.addEventListener("load", this.loadImage);
     this.rocketSprite = new Rocket(this.ctx,{width: 100, height: 175, image: this.rocketImg});
+    this.rocketFlame = new FireParticle(50,50,50,50,this.ctx);
   }
   //when the image loads we call update
   loadImage(e)
@@ -34,6 +35,7 @@ class Game
 
   update()
   {
+    this.rocketFlame.update();
     gameNamespace.game.rocketSprite.update();
     gameNamespace.game.draw();
 

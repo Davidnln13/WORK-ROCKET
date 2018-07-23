@@ -1,3 +1,6 @@
+var particles = [];
+var max = 60;
+
 class FireParticle
 {
   //The class we will use to store particles. It includes x and y
@@ -10,7 +13,6 @@ class FireParticle
     this.x=x;
     this.y=y;
     this.xs=xs;
-    this.particles =[];
     this.ys=ys;
     this.life=0;
     this.ctx = ctx;
@@ -25,14 +27,14 @@ class FireParticle
   update() {
 
     //Adds ten new particles every frame
-    for (var i=0; i<10; i++) {
-
-      //Adds a particle at the mouse position, with random horizontal and vertical speeds
-      var p = new FireParticle(50,50,2,2,this.ctx);
-      this.particles.push(p);
-    }
+    // for (var i=0; i<10; i++) {
+    //
+    //   //Adds a particle at the mouse position, with random horizontal and vertical speeds
+    //   var p = new FireParticle(50,50,2,2,this.ctx);
+    //   particles.push(p);
+    // }
     //Cycle through all the particles to draw them
-    for (i=0; i<particles.length; i++) {
+    for (var i=0; i<particles.length; i++) {
 
       //Set the file colour to an RGBA value where it starts off red-orange, but progressively gets more grey and transparent the longer the particle has been alive for
       this.ctx.fillStyle = "rgba("+(260-(particles[i].life*2))+","+((particles[i].life*2)+50)+","+(particles[i].life*2)+","+(((max-particles[i].life)/max)*0.4)+")";

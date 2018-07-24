@@ -56,8 +56,6 @@ class Rocket
   }
   render()
   {
-      //clear window redraw image
-      this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       this.ctx.drawImage(this.image,this.imgX,this.imgY,this.width,this.height);
   }
   countdownTimer()

@@ -9,8 +9,9 @@ The features for this version will be:
 	-Rocket starts to fly in 5 seconds
 	-Rocket moves toward a centre of the canvas
 	-Ground area (find/ design a temporary) which goes off canvas downward
+		-have it 30-40 pixels from the bottom
 	-A background colour is day sky blue.
-	
+
 -Make fire via particles
 	-https://www.davepagurek.com/blog/fire-particles-for-html5-canvas/
 	-Encapsulate it into a separate class, which can do the following:
@@ -19,7 +20,7 @@ The features for this version will be:
 		-Set colour of the particles
 		-Set size, quantity and life expectancy of the particles.
 		-Set initial velocity and constant velocity.
-		
+
 -Add fire to the bottom of the rocket as it starts and as it flies
 -Spawn new fire places on rocket per error
 -If there are 3 errors - remove all the spawners.

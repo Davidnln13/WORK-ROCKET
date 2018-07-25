@@ -69,6 +69,7 @@ class Rocket
         this.secondsPassed +=1;
         if(differenceInSeconds > this.countdownSeconds)
         {
+          console.log("We have lift off");
           this.countdown = false;
         }
       }

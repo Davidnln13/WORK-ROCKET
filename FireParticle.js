@@ -6,6 +6,6 @@ class FireParticle
     this.y=y;
     this.xs=xs;
     this.ys=ys;
-    this.life=0;
+    this.life=-50;
   }
 }

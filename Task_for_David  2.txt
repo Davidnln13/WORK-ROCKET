@@ -1,7 +1,7 @@
 Your task will be to investigate the space rocket game in the GS, then improve it. Requirements will be listed below. Make a folder "Task 2 - Rocket Game v1" and copy the GS into it.
 
 The features for this version will be:
-
+//done//
 -Clear out the game area
 -Create a canvas.
 -Re-implement the rocket game in canvas, with following changes
@@ -11,7 +11,7 @@ The features for this version will be:
 	-Ground area (find/ design a temporary) which goes off canvas downward
 		-have it 30-40 pixels from the bottom
 	-A background colour is day sky blue.
-
+//done//
 -Make fire via particles
 	-https://www.davepagurek.com/blog/fire-particles-for-html5-canvas/
 	-Encapsulate it into a separate class, which can do the following:
@@ -26,3 +26,4 @@ The features for this version will be:
 -If there are 3 errors - remove all the spawners.
 
 For this task - the only area you expected to play with is the modal (https://designmodo.com/design-modal-windows/ ). You should also break this into sub-tasks based on the feature list and your own development plan. Do not aim to make it look perfect - make it work perfectly.
+//done//

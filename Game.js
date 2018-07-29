@@ -1,7 +1,5 @@
 var particles = [];
-var speed=3;
-var size=20;
-var max = 60;
+
 class Game
 {
   /**
@@ -19,8 +17,8 @@ class Game
     this.rocketImg.src = "resources/images/spaceship.png";
     this.rocketImg.addEventListener("load", this.loadImage);
     this.rocketSprite = new Rocket(this.ctx,{width: 100, height: 175, image: this.rocketImg});
-
-
+    this.destroyParticleSpawners = false;
+    this.numberOfErrors = 0;
   }
   //when the image loads we call update
   loadImage(e)
@@ -41,63 +39,67 @@ class Game
 
   update()
   {
-
-    gameNamespace.game.updateFlame();
     gameNamespace.game.rocketSprite.update();
     gameNamespace.game.draw();
+    gameNamespace.game.updateParticles();
 
    //recursively calls update of game : this method
    window.requestAnimationFrame(gameNamespace.game.update);
   }
-
-  updateFlame()
+  updateParticles()
   {
-
-    //Adds ten new particles every frame
-    for (var i=0; i<10; i++)
+    //destroys all spawners
+    if(gameNamespace.game.rocketSprite.imgY <0 - gameNamespace.game.rocketSprite.height)
     {
-
-        //Adds a particle at the mouse position, with random horizontal and vertical speeds
-        if(gameNamespace.game.rocketSprite.secondsPassed >=5 )
-        {
-          var p = new FireParticle(gameNamespace.game.rocketSprite.imgX+50, gameNamespace.game.rocketSprite.imgY+155, (Math.random()*2*speed-speed)/2, 0-Math.random()*2*speed);
-          particles.push(p);
-        }
+      this.destroyParticleSpawners = true;
+    }
+    //constructor(xIn, yIn, speedXIn, speedYIn, colourIn, sizeIn, lifeExpectIn, maxIn)
+    if(this.destroyParticleSpawners === false)
+    {
+      //rocket flame particle
+         gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+50, gameNamespace.game.rocketSprite.imgY+155,
+                                3,{R:260, G:50, B:0},15,-50,60);
+         //explosion 1
+         if(this.numberOfErrors > 0)
+         {
+           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+20,gameNamespace.game.rocketSprite.imgY+50,
+                                  3,{R:260, G:50, B:0},3,-10,60);
+         }
+         //explosion 2
+         if(this.numberOfErrors > 1)
+         {
+           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+85,gameNamespace.game.rocketSprite.imgY+85,
+                                  3,{R:260, G:50, B:0},3,-10,60);
+         }
+         //explosion 3
+         if(this.numberOfErrors > 2)
+         {
+           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+65,gameNamespace.game.rocketSprite.imgY+13,
+                                  3,{R:260, G:50, B:0},3,-10,60)
+         }
+    }
+    if(gameNamespace.game.rocketSprite.secondsPassed >= gameNamespace.game.rocketSprite.countdownSeconds && particles.length > 0)
+    {
+      //Cycle through all the particles to draw them
+      particles[0].update(this.ctx,particles);
     }
 
-    //Clear the this.ctx so we can draw the new frame
-    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-
-    //Cycle through all the particles to draw them
-    for (var i=0; i<particles.length; i++)
+  }
+  createNewParticleSpawner(quantity,posX,posY,speed,colour,size,life,max)
+  {
+    for (var i=0; i<quantity; i++)
     {
-
-        //Set the file colour to an RGBA value where it starts off red-orange, but progressively
-        //gets more grey and transparent the longer the particle has been alive for
-        this.ctx.fillStyle = "rgba("+(260-(particles[i].life*2))+","+((particles[i].life*2)+50)+","+(particles[i].life*2)+","+(((max-particles[i].life)/max)*0.4)+")";
-
-        this.ctx.beginPath();
-        //Draw the particle as a circle, which gets slightly smaller the longer it's been alive for
-        this.ctx.arc(particles[i].x,particles[i].y,(max-particles[i].life)/max*(size/2)+(size/2),0,2*Math.PI);
-        this.ctx.fill();
-
-        //Move the particle based on its horizontal and vertical speeds
-        particles[i].x+=particles[i].xs;
-        particles[i].y-=particles[i].ys;
-
-        particles[i].life++;
-        //If the particle has lived longer than we are allowing, remove it from the array.
-        if (particles[i].life >= max)
+        if(gameNamespace.game.rocketSprite.secondsPassed >= gameNamespace.game.rocketSprite.countdownSeconds)
         {
-            particles.splice(i, 1);
-            i--;
+          var p = new FireParticle(posX,posY,(Math.random()*2*speed-speed)/2,0-Math.random()*2*speed,{R:colour.R, G:colour.G, B:colour.B},size,life,max);
+          particles.push(p);
         }
     }
   }
   draw()
   {
     //clear window redraw image
-    //this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.rocketSprite.render();
   }
 }

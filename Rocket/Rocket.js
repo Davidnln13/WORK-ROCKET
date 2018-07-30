@@ -23,6 +23,16 @@ class Rocket
      this.finalVelocityY = 15;
      //the change i want everytime we update
      this.changeInVelocity = 0.001;
+     this.waitHalfway = true;
+     // if the rocket is destroyed fall off
+     this.rocketDestroyed = false;
+     //moving the rocket side to side
+     this.centered = true;
+     this.moveBy;
+     this.moveDirection;
+     this.moveOut = true;
+     this.moveBack = false;
+     this.moveSteps = 0;
   }
   update()
   {
@@ -46,13 +56,81 @@ class Rocket
     }
 
   }
+  moveSidewards(min,max)
+  {
+    if(this.centered === true)
+    {
+      this.moveBy = Math.floor(Math.random() * (max - min) + min);
+      this.moveDirection = Math.floor(Math.random() * (3 - 1) + 1);
+      this.centered = false;
+      console.log(this.moveBy,this.moveDirection);
+    }
+    if(this.moveDirection === 1 && this.centered === false)
+    {
+      if(this.moveOut === true && this.centered === false)
+      {
+        this.imgX -= 1;
+        this.moveSteps++;
+      }
+      if(this.moveBack === true && this.centered === false)
+      {
+        this.imgX += 1;
+        this.moveSteps--;
+        if(this.moveSteps === 0)
+        {
+          this.centered = true;
+          this.moveOut = true;
+          this.moveBack = false;
+        }
+      }
+      if(this.moveSteps >= this.moveBy && this.centered === false)
+      {
+        this.moveOut = false;
+        this.moveBack = true;
+      }
+    }
+    if(this.moveDirection === 2 && this.centered === false)
+    {
+      if(this.moveOut === true && this.centered === false)
+      {
+        this.imgX += 1;
+        this.moveSteps++;
+      }
+      if(this.moveBack === true && this.centered === false)
+      {
+        this.imgX -= 1;
+        this.moveSteps--;
+        if(this.moveSteps === 0)
+        {
+          this.centered = true;
+          this.moveOut = true;
+          this.moveBack = false;
+        }
+      }
+      if(this.moveSteps >= this.moveBy && this.centered === false)
+      {
+        this.moveOut = false;
+        this.moveBack = true;
+      }
+    }
+
+  }
   moveUp()
   {
-    if(this.currentVelocityY < this.finalVelocityY)
+    //if we are not waiting halfway move normally
+    if(this.waitHalfway === true)
     {
-      this.currentVelocityY += this.changeInVelocity;
+      if(this.currentVelocityY < this.finalVelocityY)
+      {
+        this.currentVelocityY += this.changeInVelocity;
+      }
+        this.imgY -= this.currentVelocityY;
     }
-    this.imgY -= this.currentVelocityY;
+    if(this.rocketDestroyed === true)
+    {
+      this.currentVelocityY += 0.98;
+      this.imgY += this.currentVelocityY;
+    }
   }
   render()
   {

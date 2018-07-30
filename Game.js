@@ -20,7 +20,7 @@ class Game
     //used to destroy the spawners
     gameNamespace.destroyParticleSpawners = false;
     //number of errors decides the number of explosions
-    this.numberOfErrors = 3;
+    this.numberOfErrors = 2;
     //rocket speed needed for when the rocket is centered to make it look like its still moving
     gameNamespace.rocketSpeed = 0;
     //timers needed to start the rocket moving again
@@ -33,6 +33,9 @@ class Game
     this.explodeOne = false;
     this.explodeTwo = false;
     this.exploseThree = false;
+    //move values
+    this.moveAmtMin = 50;
+    this.moveAmtMax = 200;
   }
   //when the image loads we call update
   loadImage(e)
@@ -80,7 +83,7 @@ class Game
     }
     if(this.waited === true)
     {
-      gameNamespace.game.rocketSprite.moveSidewards(50,200);
+      gameNamespace.game.rocketSprite.moveSidewards(this.moveAmtMin,this.moveAmtMax);
       //update timer every time we enter here
       gameNamespace.currentTime = new Date();
       //when the difference is more than the countdown take off

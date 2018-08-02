@@ -20,7 +20,7 @@ class Game
     //used to destroy the spawners
     gameNamespace.destroyParticleSpawners = false;
     //number of errors decides the number of explosions
-    this.numberOfErrors = 2;
+    this.numberOfErrors = 3;
     //rocket speed needed for when the rocket is centered to make it look like its still moving
     gameNamespace.rocketSpeed = 0;
     //timers needed to start the rocket moving again
@@ -136,19 +136,19 @@ class Game
          //explosion 1
          if(this.numberOfErrors > 0 && this.explodeOne === true )
          {
-           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+20,gameNamespace.game.rocketSprite.imgY+50,
+           gameNamespace.game.createNewParticleSpawner(3,gameNamespace.game.rocketSprite.imgX+20,gameNamespace.game.rocketSprite.imgY+50,
                                   3,3,0,{R:260, G:50, B:0},3,-10,60);
          }
          //explosion 2
          if(this.numberOfErrors > 1 && this.explodeTwo === true)
          {
-           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+85,gameNamespace.game.rocketSprite.imgY+85,
+           gameNamespace.game.createNewParticleSpawner(3,gameNamespace.game.rocketSprite.imgX+85,gameNamespace.game.rocketSprite.imgY+85,
                                   3,3,0,{R:260, G:50, B:0},3,-10,60);
          }
          //explosion 3
          if(this.numberOfErrors > 2 && this.explodeThree == true)
          {
-           gameNamespace.game.createNewParticleSpawner(10,gameNamespace.game.rocketSprite.imgX+65,gameNamespace.game.rocketSprite.imgY+13,
+           gameNamespace.game.createNewParticleSpawner(3,gameNamespace.game.rocketSprite.imgX+65,gameNamespace.game.rocketSprite.imgY+13,
                                   3,3,0,{R:260, G:50, B:0},3,-10,60)
          }
     }
